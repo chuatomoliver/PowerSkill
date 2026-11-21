@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { createTestUsers } from "./test-users";
 
 const prisma = new PrismaClient();
 
@@ -98,7 +99,8 @@ async function main() {
         attendees: k < 0 ? 35 + Math.floor(Math.random() * 60) : 0 } });
     }
   }
-  console.log("Seeded", createdCamps.length, "bootcamps");
+  await createTestUsers(prisma);
+  console.log("Seeded", createdCamps.length, "bootcamps + test accounts (see prisma/test-users.ts)");
 }
 
 main().finally(() => prisma.$disconnect());

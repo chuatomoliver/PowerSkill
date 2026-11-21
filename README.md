@@ -39,6 +39,20 @@ No Docker? `brew install livekit && livekit-server --dev` works the same.
 - Admin: `admin@powerskill.test` / `admin123`
 - Student: `student@powerskill.test` / `student123` (confirmed in Full-Stack and Japanese)
 
+### Test accounts — 3 per role (dev only)
+
+| Role | Emails | Password |
+|---|---|---|
+| ADMIN | `admin1@powerskill.test`, `admin2@…`, `admin3@…` | `admin123` |
+| INSTRUCTOR | `instructor1@powerskill.test`, `instructor2@…`, `instructor3@…` | `instructor123` |
+| STUDENT | `student1@powerskill.test`, `student2@…`, `student3@…` | `student123` |
+
+Test students are confirmed in Full-Stack and Japanese, so they can join live classes immediately. Instructors currently have the same access as admins. `npm run db:setup` creates them; to add them to an existing database without wiping it:
+
+```bash
+npm run db:test-users
+```
+
 ## Features
 
 **Website** — home page, bootcamp catalog with search & category filters, bootcamp detail with curriculum, seat reservation, student "My Learning" dashboard with Join buttons.

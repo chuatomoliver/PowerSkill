@@ -10,7 +10,8 @@
     "db:setup": "prisma db push && prisma db seed",
     "postinstall": "prisma generate",
     "livekit": "docker compose up -d livekit",
-    "smoke": "tsx --env-file=.env scripts/smoke-classroom-access.mts"
+    "smoke": "tsx --env-file=.env scripts/smoke-classroom-access.mts",
+    "db:test-users": "tsx prisma/test-users.ts"
   },
   "dependencies": {
     "@livekit/components-react": "^2.9.26",
