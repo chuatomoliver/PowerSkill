@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, GraduationCap, Users, Infinity as InfinityIcon, CheckCircle2, BarChart3, Video, Mic, MonitorUp, Award, Briefcase, Laptop, Send } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { BootcampCard } from "@/components/BootcampCard";
@@ -134,6 +135,25 @@ export default async function Home() {
               const C = I as typeof Users;
               return (<div key={t as string} className="flex gap-4"><span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand-100 text-brand-600"><C className="h-6 w-6" /></span><div><h3 className="font-bold">{t as string}</h3><p className="mt-1 text-sm text-slate-500">{d as string}</p></div></div>);
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* FOUNDER */}
+      <section id="founder" className="container-x py-16">
+        <div className="grid items-center gap-10 md:grid-cols-[minmax(0,320px)_1fr] lg:gap-16">
+          <div className="relative mx-auto w-full max-w-[320px]">
+            <div className="absolute -inset-3 -rotate-3 rounded-[2rem] bg-gradient-to-br from-brand-500 to-sky-300 opacity-90" />
+            <Image src="/images/founder-lester-tan-saez.png" alt="Lester Tan Saez, Founder of PowerSkill" width={602} height={744} sizes="320px" className="relative aspect-[4/5] w-full rounded-[1.75rem] object-cover object-top shadow-xl" priority={false} />
+            <span className="badge absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white px-4 py-1.5 text-brand-700 shadow-md">Founder</span>
+          </div>
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-600">Meet our founder</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Lester Tan Saez</h2>
+            <p className="mt-1 font-medium text-slate-500">Founder, PowerSkill</p>
+            <p className="mt-6 max-w-xl text-slate-600">PowerSkill was founded to make career-changing skills accessible to everyone — through live, instructor-led bootcamps where learners study together in real time, ask questions, and build real projects instead of just watching videos.</p>
+            <p className="mt-4 max-w-xl text-slate-600">From software development to English and Japanese, every program is built around one goal: helping learners gain skills today for a brighter tomorrow.</p>
+            <p className="mt-6 rotate-[-2deg] font-script text-3xl text-brand-700">Lester Tan Saez</p>
           </div>
         </div>
       </section>
