@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String       @id @default(cuid())
+  name        String
+  email       String       @unique
+  password    String
+  role        String       @default("STUDENT") // STUDENT | INSTRUCTOR | ADMIN
+  createdAt   DateTime     @default(now())
+  enrollments Enrollment[]
+}
+
+model Bootcamp {
+  id           String       @id @default(cuid())
+  slug         String       @unique
+  title        String
+  category     String
+  summary      String
+  description  String
+  instructor   String
+  level        String       @default("Beginner")
+  durationWeeks Int         @default(8)
+  hoursPerWeek Int          @default(6)
+  price        Int          // in USD cents
+  originalPrice Int?
+  capacity     Int          @default(100)
+  startDate    DateTime
+  schedule     String       // e.g. "Mon & Wed · 7:00–9:00 PM"
+  imageColor   String       @default("#2563eb")
+  icon         String       @default("Code")
+  curriculum   String       @default("[]") // JSON array of strings
+  rating       Float        @default(4.7)
+  published    Boolean      @default(true)
+  featured     Boolean      @default(false)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  enrollments  Enrollment[]
+  sessions     ClassSession[]
+}
+
+model Enrollment {
+  id         String   @id @default(cuid())
+  userId     String
+  bootcampId String
+  status     String   @default("PENDING") // PENDING | CONFIRMED | CANCELLED
+  amount     Int      // cents paid
+  phone      String?
+  notes      String?
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bootcamp   Bootcamp @relation(fields: [bootcampId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, bootcampId])
+}
+
+model ClassSession {
+  id         String    @id @default(cuid())
+  bootcampId String
+  title      String
+  roomName   String    @unique
+  startsAt   DateTime
+  durationMin Int      @default(90)
+  status     String    @default("SCHEDULED") // SCHEDULED | LIVE | ENDED
+  attendees  Int       @default(0)
+  createdAt  DateTime  @default(now())
+  bootcamp   Bootcamp  @relation(fields: [bootcampId], references: [id], onDelete: Cascade)
+}
